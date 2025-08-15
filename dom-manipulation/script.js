@@ -1,32 +1,33 @@
-// Array of quotes
+// Array of quotes with text and category
 let quotes = [
-    "The best way to get started is to quit talking and begin doing.",
-    "Don’t let yesterday take up too much of today.",
-    "It’s not whether you get knocked down, it’s whether you get up.",
-    "If you are working on something exciting, it will keep you motivated."
+    { text: "The best way to get started is to quit talking and begin doing.", category: "Motivation" },
+    { text: "Don’t let yesterday take up too much of today.", category: "Inspiration" },
+    { text: "It’s not whether you get knocked down, it’s whether you get up.", category: "Resilience" },
+    { text: "If you are working on something exciting, it will keep you motivated.", category: "Passion" }
 ];
 
 // Function to display a random quote
 function displayRandomQuote() {
-    const quoteDisplay = document.getElementById("quoteDisplay"); // matches HTML
+    const quoteDisplay = document.getElementById("quoteDisplay");
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomIndex];
 
-    // Use innerHTML as required
-    quoteDisplay.innerHTML = randomQuote;
+    // Show both text and category
+    quoteDisplay.innerHTML = `"${randomQuote.text}" <br><em>- ${randomQuote.category}</em>`;
 }
 
 // Function to add a new quote
 function addQuote() {
-    const newQuoteInput = document.getElementById("newQuoteText");
-    const newQuote = newQuoteInput.value.trim();
+    const newQuoteText = document.getElementById("newQuoteText").value.trim();
+    const newQuoteCategory = document.getElementById("newQuoteCategory").value.trim();
 
-    if (newQuote) {
-        quotes.push(newQuote);
-        newQuoteInput.value = "";
+    if (newQuoteText && newQuoteCategory) {
+        quotes.push({ text: newQuoteText, category: newQuoteCategory });
+        document.getElementById("newQuoteText").value = "";
+        document.getElementById("newQuoteCategory").value = "";
         displayRandomQuote();
     } else {
-        alert("Please enter a valid quote.");
+        alert("Please enter both a quote and a category.");
     }
 }
 
