@@ -11,9 +11,33 @@ function showRandomQuote() {
     const quoteDisplay = document.getElementById("quoteDisplay");
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomIndex];
-
-    // Show both text and category
     quoteDisplay.innerHTML = `"${randomQuote.text}" <br><em>- ${randomQuote.category}</em>`;
+}
+
+// Function to create the "Add Quote" form dynamically
+function createAddQuoteForm() {
+    const formContainer = document.createElement("div");
+    formContainer.style.marginTop = "20px";
+
+    const quoteInput = document.createElement("input");
+    quoteInput.id = "newQuoteText";
+    quoteInput.type = "text";
+    quoteInput.placeholder = "Enter a new quote";
+
+    const categoryInput = document.createElement("input");
+    categoryInput.id = "newQuoteCategory";
+    categoryInput.type = "text";
+    categoryInput.placeholder = "Enter quote category";
+
+    const addButton = document.createElement("button");
+    addButton.textContent = "Add Quote";
+    addButton.addEventListener("click", addQuote);
+
+    formContainer.appendChild(quoteInput);
+    formContainer.appendChild(categoryInput);
+    formContainer.appendChild(addButton);
+
+    document.body.appendChild(formContainer);
 }
 
 // Function to add a new quote
@@ -25,14 +49,30 @@ function addQuote() {
         quotes.push({ text: newQuoteText, category: newQuoteCategory });
         document.getElementById("newQuoteText").value = "";
         document.getElementById("newQuoteCategory").value = "";
-        showRandomQuote(); // updated here too
+        showRandomQuote();
     } else {
         alert("Please enter both a quote and a category.");
     }
 }
 
-// Event listener for "Show New Quote" button
-document.getElementById("newQuote").addEventListener("click", showRandomQuote);
+// Create the "Show New Quote" button dynamically
+function createShowQuoteButton() {
+    const button = document.createElement("button");
+    button.textContent = "Show New Quote";
+    button.addEventListener("click", showRandomQuote);
+    document.body.appendChild(button);
+}
 
-// Event listener for "Add Quote" button
-document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
+// Initialize the page
+document.addEventListener("DOMContentLoaded", () => {
+    const quoteDisplay = document.createElement("div");
+    quoteDisplay.id = "quoteDisplay";
+    quoteDisplay.style.marginBottom = "20px";
+    quoteDisplay.style.fontSize = "18px";
+    quoteDisplay.style.fontStyle = "italic";
+    document.body.appendChild(quoteDisplay);
+
+    createShowQuoteButton();
+    createAddQuoteForm();
+    showRandomQuote();
+});
