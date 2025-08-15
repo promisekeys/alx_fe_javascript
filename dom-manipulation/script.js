@@ -6,8 +6,8 @@ let quotes = [
     { text: "If you are working on something exciting, it will keep you motivated.", category: "Passion" }
 ];
 
-// Function to display a random quote
-function displayRandomQuote() {
+// Function to show a random quote
+function showRandomQuote() {
     const quoteDisplay = document.getElementById("quoteDisplay");
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomIndex];
@@ -25,14 +25,14 @@ function addQuote() {
         quotes.push({ text: newQuoteText, category: newQuoteCategory });
         document.getElementById("newQuoteText").value = "";
         document.getElementById("newQuoteCategory").value = "";
-        displayRandomQuote();
+        showRandomQuote(); // updated here too
     } else {
         alert("Please enter both a quote and a category.");
     }
 }
 
 // Event listener for "Show New Quote" button
-document.getElementById("newQuote").addEventListener("click", displayRandomQuote);
+document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 
 // Event listener for "Add Quote" button
 document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
