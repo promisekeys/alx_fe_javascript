@@ -1,36 +1,37 @@
+// Array of quotes
 let quotes = [
-  { text: "The best way to get started is to quit talking and begin doing.", category: "Motivation" },
-  { text: "Your time is limited, so don't waste it living someone else's life.", category: "Inspiration" },
-  { text: "The purpose of our lives is to be happy.", category: "Life" }
+    "The best way to get started is to quit talking and begin doing.",
+    "Don’t let yesterday take up too much of today.",
+    "It’s not whether you get knocked down, it’s whether you get up.",
+    "If you are working on something exciting, it will keep you motivated."
 ];
 
+// Function to display a random quote
+function displayRandomQuote() {
+    const quoteDisplay = document.getElementById("quoteDisplay"); // matches HTML
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    const randomQuote = quotes[randomIndex];
 
-function showRandomQuote() {
-  const quoteDisplay = document.getElementById("quoteDisplay");
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-  const quote = quotes[randomIndex];
-  quoteDisplay.textContent = `"${quote.text}" — [${quote.category}]`;
+    // Use innerHTML as required
+    quoteDisplay.innerHTML = randomQuote;
 }
 
+// Function to add a new quote
 function addQuote() {
-  const textInput = document.getElementById("newQuoteText");
-  const categoryInput = document.getElementById("newQuoteCategory");
+    const newQuoteInput = document.getElementById("newQuoteText");
+    const newQuote = newQuoteInput.value.trim();
 
-  const text = textInput.value.trim();
-  const category = categoryInput.value.trim();
-
-  if (text && category) {
-    quotes.push({ text, category });
-    alert("Quote added successfully!");
-    textInput.value = "";
-    categoryInput.value = "";
-  } else {
-    alert("Please enter both a quote and a category.");
-  }
+    if (newQuote) {
+        quotes.push(newQuote);
+        newQuoteInput.value = "";
+        displayRandomQuote();
+    } else {
+        alert("Please enter a valid quote.");
+    }
 }
 
+// Event listener for "Show New Quote" button
+document.getElementById("newQuote").addEventListener("click", displayRandomQuote);
 
-document.getElementById("newQuote").addEventListener("click", showRandomQuote);
+// Event listener for "Add Quote" button
 document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
-
-document.addEventListener("DOMContentLoaded", showRandomQuote);
