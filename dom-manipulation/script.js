@@ -1,21 +1,3 @@
-// Post a new quote to the mock server
-async function postQuoteToServer(quote) {
-    try {
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(quote)
-        });
-
-        const data = await response.json();
-        console.log("Quote posted to server:", data);
-    } catch (error) {
-        console.error("Error posting quote:", error);
-    }
-}
-
 // Sync quotes with the server periodically
 function syncQuotes() {
     // Fetch new quotes from server
@@ -33,7 +15,8 @@ function syncQuotes() {
     // Save back updated quotes
     localStorage.setItem("quotes", JSON.stringify(storedQuotes));
 
-    console.log("Quotes synced with server");
+    // ✅ UI notification
+    alert("Quotes synced with server!");
 }
 
 // Run sync every 30 seconds
